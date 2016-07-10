@@ -23,7 +23,7 @@ export default class Connection extends React.Component {
 
 		client.search(params, (err, data) => {
 			data.items.map( (item) => {
-		
+
 				let new_data = { item: item};
 				this.state.data.push( new_data );
 				let data_global = this.state.data;
