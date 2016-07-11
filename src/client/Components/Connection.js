@@ -24,7 +24,7 @@ export default class Connection extends React.Component {
 		client.search(params, (err, data) => {
 			data.items.map( (item) => {
 
-				let new_data = { item: item};
+				let new_data = { item: item };
 				this.state.data.push( new_data );
 				let data_global = this.state.data;
 				this.setState({ data: data_global });
@@ -39,7 +39,6 @@ export default class Connection extends React.Component {
 	render(){
 
 		return <div>
-			<input type="submit" value="Search" onClick={this.DataApi}/>
 			<Control datos={this.state.data}/>
 		</div>
 	}
