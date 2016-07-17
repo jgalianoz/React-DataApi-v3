@@ -37,7 +37,7 @@ export default class App extends React.Component {
 			part: 'snippet',
 			type: 'video',
 			q: value,
-			maxResults: 5			
+			maxResults: 12			
 		}
 
 		client.search(params, (err, data) => {

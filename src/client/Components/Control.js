@@ -5,19 +5,17 @@ import Show from './Show'
 export default class Control extends React.Component {
 	render(){
 		return <div className="container-videos">
-			<ul className="List-videos">
-				{
-					this.props.datos.map( (el) => {
+			{
+				this.props.datos.map( (el) => {
 
-						let id = uid()
+					let id = uid()
 
-						return <Show 
-							key={id}
-							video={el.item.id}
-							snippet={el.item.snippet} />
-					})
-				}
-			</ul>
+					return <Show 
+						key={id}
+						video={el.item.id}
+						snippet={el.item.snippet} />
+				})
+			}
 		</div>
 	}
 }

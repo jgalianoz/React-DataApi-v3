@@ -1,12 +1,45 @@
 #container
 .container-videos
 	margin-top 3em
-	text-align center
 
 
 .container-videos
-	padding 1em
+	padding 0 15px
+	text-align center
 
-.List-videos
+.item-videos
+	display inline-block
+	margin 0 0 1em
+	max-width 300px
+	text-align left
+	vertical-align top
+	width 91%
+	
+	&-avatar
+		overflow hidden
+
+	&-title
+		font-size 1.2em
+		font-weight normal
+		color white
+		
+	&-author
+		&-channel
+			color #083643
+			
+@media (min-width: 450px)
+		 
 	.item-videos
-		display inline-block
+		margin 0 1em 1em 0
+		
+		&:nth-child(2n)
+			margin-right 0
+			
+@media (min-width: 800px)
+
+	.item-videos
+		&:nth-child(2n)
+			margin-right 1em
+			
+		&:nth-child(3n)
+			margin-right 0	

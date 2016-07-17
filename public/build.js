@@ -22098,7 +22098,7 @@ var App = function (_React$Component) {
 				part: 'snippet',
 				type: 'video',
 				q: value,
-				maxResults: 5
+				maxResults: 12
 			};
 
 			client.search(params, function (err, data) {
@@ -22194,19 +22194,15 @@ var Control = function (_React$Component) {
 			return _react2.default.createElement(
 				'div',
 				{ className: 'container-videos' },
-				_react2.default.createElement(
-					'ul',
-					{ className: 'List-videos' },
-					this.props.datos.map(function (el) {
+				this.props.datos.map(function (el) {
 
-						var id = (0, _uid2.default)();
+					var id = (0, _uid2.default)();
 
-						return _react2.default.createElement(_Show2.default, {
-							key: id,
-							video: el.item.id,
-							snippet: el.item.snippet });
-					})
-				)
+					return _react2.default.createElement(_Show2.default, {
+						key: id,
+						video: el.item.id,
+						snippet: el.item.snippet });
+				})
 			);
 		}
 	}]);
@@ -22251,15 +22247,29 @@ var Show = function (_React$Component) {
 		value: function render() {
 
 			return _react2.default.createElement(
-				"a",
-				{ href: "#" },
+				"article",
+				{ className: "item-videos" },
 				_react2.default.createElement(
-					"li",
-					{ className: "item-videos" },
+					"a",
+					{ href: "#" },
 					_react2.default.createElement(
 						"figure",
-						null,
+						{ className: "item-videos-avatar" },
 						_react2.default.createElement("img", { src: this.props.snippet.thumbnails.medium.url })
+					),
+					_react2.default.createElement(
+						"h2",
+						{ className: "item-videos-title" },
+						this.props.snippet.title
+					),
+					_react2.default.createElement(
+						"div",
+						{ className: "item-videos-author" },
+						_react2.default.createElement(
+							"span",
+							{ className: "item-videos-author-channel" },
+							this.props.snippet.channelTitle
+						)
 					)
 				)
 			);
