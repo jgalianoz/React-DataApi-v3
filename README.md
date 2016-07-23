@@ -8,4 +8,4 @@ using youtube api for viewing videos
     npm install
     npm start
 ```
-Server listen in localhots: 8000
+Server listen in localhots: 3000
