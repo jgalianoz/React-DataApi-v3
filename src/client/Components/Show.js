@@ -1,11 +1,12 @@
-import React from 'react'
-
+import React from 'react';
+import { Link } from 'react-router';
+import Reproductive from './reproductive';
 
 export default class Show extends React.Component {
 	render(){
 
 		return <article className="item-videos">
-				<a href="#">
+				<Link to={`/video/watch?v=${this.props.video.videoId}`}>
 					<figure className="item-videos-avatar">
 						<img src={this.props.snippet.thumbnails.medium.url} />
 					</figure>
@@ -15,7 +16,8 @@ export default class Show extends React.Component {
 					<div className="item-videos-author">
 						<span className="item-videos-author-channel">{this.props.snippet.channelTitle}</span>
 					</div>
-				</a>
+				</Link>
+				
 			</article>
 		
 	}

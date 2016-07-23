@@ -1,6 +1,7 @@
-import React from 'react'
-import uid from 'uid'
-import Show from './Show'
+import React from 'react';
+import uid from 'uid';
+import Show from './Show';
+
 
 export default class Control extends React.Component {
 	render(){

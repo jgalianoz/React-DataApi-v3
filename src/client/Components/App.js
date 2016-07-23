@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import youtube from 'youtube-finder';
-import Control from './Control'
+import Control from './Control';
 
 const client = youtube.createClient({ key: 'AIzaSyACqiYw-u2XLNV_XxVZGABLnqOzBTnIC6s' })
 
@@ -12,64 +12,61 @@ export default class App extends React.Component {
 
 		this.state = { data: [] }
 		this.DataApi = this.DataApi.bind(this)
+		this.onSearch = this.onSearch.bind(this)
 	}
 
-	/*updateUserInput(input){
-		console.log(input.target.value)
-
-		let value = input.target.value
-
-		DataApi(value)
-	}*/
-
-	DataApi (ev){
-
-		ev.preventDefault();
+	DataApi (){
 
 		const value = this.refs.query.value
-
-		if (value === ''){
-			alert('busuqeda vacia');
-			return;
-		}
-
+	
 		let params = {
 			part: 'snippet',
 			type: 'video',
 			q: value,
-			maxResults: 12			
+			maxResults: 15		
 		}
 
 		client.search(params, (err, data) => {
+
+			if (err) console.log(err)
+
+			this.setState({data: [] })
+
 			data.items.map( (item) => {
 
 				let new_data = { item: item };
 				this.state.data.push( new_data );
 				let data_global = this.state.data;
 				this.setState({ data: data_global });
+
 			})
 		})
 	}
 
-	/*componentDidMount(){
+	onSearch(ev){
+		ev.preventDefault();
 		this.DataApi();
-	}*/
+	}
+
+	componentDidMount(){
+		this.DataApi();
+	}
 
 	render(){
 		return <div className="wrapper">
-			<form action="#" className="query" onSubmit={this.DataApi}>
+			<form action="#" className="query">
 				<div className="inputContainer">
 					<input
 					 id="search"
 					 type="text"
 					 name="query"
 					 ref="query"
-					 placeholder="Search"/>
+					 placeholder="Find your favorite video..."/>
 
 					<button
 					 className="icon-search send"
 					 type="submit"
-					 onClick={this.DataApi}></button>
+					 onClick={this.onSearch}></button>
 			
 				</div>
 			</form>
