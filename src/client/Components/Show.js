@@ -1,24 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router';
-import Reproductive from './reproductive';
 
 export default class Show extends React.Component {
 	render(){
 
+
+		const channel = `https://www.youtube.com/channel/${this.props.snippet.channelId}`
+
 		return <article className="item-videos">
-				<Link to={`/video/watch?v=${this.props.video.videoId}`}>
+				<Link to={`video/${this.props.video.videoId}`}>
 					<figure className="item-videos-avatar">
 						<img src={this.props.snippet.thumbnails.medium.url} />
 					</figure>
 
 					<h2 className="item-videos-title">{this.props.snippet.title}</h2>
+				</Link>
 
 					<div className="item-videos-author">
-						<span className="item-videos-author-channel">{this.props.snippet.channelTitle}</span>
+						<a href={channel} className="item-videos-author-channel" target="__blank">{this.props.snippet.channelTitle}</a>
 					</div>
-				</Link>
-				
+
 			</article>
-		
 	}
 }

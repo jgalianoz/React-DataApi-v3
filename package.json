@@ -8,18 +8,21 @@
     "babel-preset-react": "^6.11.1",
     "babelify": "^7.3.0",
     "browserify": "^13.0.1",
+    "express": "^4.14.0",
+    "node-jsx-babel": "^0.14.2",
     "react": "^15.2.0",
     "react-dom": "^15.2.0",
+    "react-engine": "^4.0.1",
     "react-router": "^2.5.2",
     "serve": "^1.4.0",
     "uid": "0.0.2",
     "youtube-finder": "^1.0.0"
   },
-  "devDependencies": {},
   "scripts": {
     "style": "stylus -u nib -c -o public/ src/client/stylus/main.styl",
-    "build": "browserify -t [  babelify --presets [ es2015 react]  ] src/client/app.js > public/build.js",
-    "start": "npm run style && npm run build && serve public"
+    "build": "NODE_PATH=. browserify -t [  babelify --presets [ es2015 react]  ] src/client/app.js > public/build.js",
+    "server": "babel-node server.js",
+    "start": "npm run style && npm run build && npm run server"
   },
   "repository": {
     "type": "git",

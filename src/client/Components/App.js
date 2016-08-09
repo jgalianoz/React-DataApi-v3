@@ -4,55 +4,75 @@ import Control from './Control';
 
 const client = youtube.createClient({ key: 'AIzaSyACqiYw-u2XLNV_XxVZGABLnqOzBTnIC6s' })
 
-
 export default class App extends React.Component {
 
 	constructor(props){
 		super(props);
 
-		this.state = { data: [] }
+		this.state = {
+			data: [] 
+		}
 		this.DataApi = this.DataApi.bind(this)
-		this.onSearch = this.onSearch.bind(this)
+		this.sendForm = this.sendForm.bind(this)
+	}
+
+	sendForm(ev){
+		try {
+			ev.preventDefault();
+			this.DataApi();
+
+
+		} catch (err){
+			console.log(err);
+		}
+
 	}
 
 	DataApi (){
 
-		const value = this.refs.query.value
-	
-		let params = {
+		const query = this.refs.query.value
+
+		const params = {
 			part: 'snippet',
 			type: 'video',
-			q: value,
-			maxResults: 15		
+			q: query,
+			maxResults: 12		
 		}
 
-		client.search(params, (err, data) => {
+		try {
 
-			if (err) console.log(err)
+			client.search(params, (err, data) => {
 
-			this.setState({data: [] })
+				if (err) console.log(err)
 
-			data.items.map( (item) => {
+				this.setState({data: [] })
 
-				let new_data = { item: item };
-				this.state.data.push( new_data );
-				let data_global = this.state.data;
-				this.setState({ data: data_global });
+				data.items.map( (item) => {
 
+					let new_data = { item: item };
+					this.state.data.push( new_data );
+					let data_global = this.state.data;
+					this.setState({ data: data_global });
+
+				})
 			})
-		})
-	}
 
-	onSearch(ev){
-		ev.preventDefault();
-		this.DataApi();
+		} catch ( err ) {
+			console.log(err);
+		}
 	}
 
 	componentDidMount(){
-		this.DataApi();
+		try {
+			this.DataApi()
+		} catch (err) {
+			console.log(err)
+		}
 	}
 
 	render(){
+
+
 		return <div className="wrapper">
 			<form action="#" className="query">
 				<div className="inputContainer">
@@ -62,12 +82,12 @@ export default class App extends React.Component {
 					 name="query"
 					 ref="query"
 					 placeholder="Find your favorite video..."/>
-
-					<button
+			
+					<button 
 					 className="icon-search send"
 					 type="submit"
-					 onClick={this.onSearch}></button>
-			
+					 onClick={this.sendForm}></button>
+
 				</div>
 			</form>
 
