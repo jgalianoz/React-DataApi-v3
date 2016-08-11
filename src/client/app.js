@@ -7,6 +7,6 @@ import Reproductive from './Components/Reproductive';
 render(
   <Router history={browserHistory}>
     <Route path="/" component={App}></Route>
-    <Route path="/video/:videoId" component={Reproductive} />
+    <Route path="/:videoId" component={Reproductive} />
   </Router>, 
   document.getElementById('container'))

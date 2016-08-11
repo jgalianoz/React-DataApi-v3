@@ -27,7 +27,7 @@ app.set('view engine', 'jsx');
 
 app.set('view', engine.expressView);
 
-app.get('/', (req, res) => res.render('index', { title: 'Youtube Data Api' }));
+app.get('*', (req, res) => res.render('index', { title: 'Youtube Data Api' }));
 
 app.listen(port, () => console.log(`Server listen in localhost: ${port}`))
 

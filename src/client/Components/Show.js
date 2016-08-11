@@ -4,11 +4,10 @@ import { Link } from 'react-router';
 export default class Show extends React.Component {
 	render(){
 
-
 		const channel = `https://www.youtube.com/channel/${this.props.snippet.channelId}`
 
 		return <article className="item-videos">
-				<Link to={`video/${this.props.video.videoId}`}>
+				<Link to={`/watch?v=${this.props.video.videoId}`}>
 					<figure className="item-videos-avatar">
 						<img src={this.props.snippet.thumbnails.medium.url} />
 					</figure>

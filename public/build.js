@@ -27600,7 +27600,7 @@ var Reproductive = function (_React$Component) {
 
 		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Reproductive).call(this, props));
 
-		_this.videoId = _this.props.params.videoId;
+		_this.videoId = _this.props.location.query.v;
 		return _this;
 	}
 
@@ -27609,7 +27609,7 @@ var Reproductive = function (_React$Component) {
 		value: function render() {
 
 			{
-				console.log(this.props);
+				console.log(this.props.pagename);
 			}
 
 			var url = 'https://www.youtube.com/embed/' + this.videoId + '?rel=0&showinfo=0&controls=1&autoplay=1';
@@ -27683,7 +27683,7 @@ var Show = function (_React$Component) {
 				{ className: 'item-videos' },
 				_react2.default.createElement(
 					_reactRouter.Link,
-					{ to: 'video/' + this.props.video.videoId },
+					{ to: '/watch?v=' + this.props.video.videoId },
 					_react2.default.createElement(
 						'figure',
 						{ className: 'item-videos-avatar' },
@@ -27738,7 +27738,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   _reactRouter.Router,
   { history: _reactRouter.browserHistory },
   _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App2.default }),
-  _react2.default.createElement(_reactRouter.Route, { path: '/video/:videoId', component: _Reproductive2.default })
+  _react2.default.createElement(_reactRouter.Route, { path: '/:videoId', component: _Reproductive2.default })
 ), document.getElementById('container'));
 
 },{"./Components/App":244,"./Components/Reproductive":246,"react":234,"react-dom":5,"react-router":35}]},{},[248]);

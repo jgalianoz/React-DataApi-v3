@@ -4,11 +4,12 @@ export default class Reproductive extends React.Component {
 
 	constructor(props){
 		super(props)
-		this.videoId = this.props.params.videoId;
+		this.videoId = this.props.location.query.v;
 	}
 
 	render() {
 
+		{console.log(this.props.pagename)}
 
 		const url = `https://www.youtube.com/embed/${this.videoId}?rel=0&showinfo=0&controls=1&autoplay=1`;
 
