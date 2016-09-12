@@ -23,7 +23,7 @@ app.set('views', path.join(__dirname, '/src/client/views'));
 
 app.set('view engine', 'jsx');
 
-// Le indicamos que usea react-engine como engine de nuestas vistas
+// Le indicamos que use react-engine como engine de nuestas vistas
 
 app.set('view', engine.expressView);
 

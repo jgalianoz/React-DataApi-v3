@@ -10,7 +10,7 @@ export default class App extends React.Component {
 		super(props);
 
 		this.state = {
-			data: [] 
+			data: []
 		}
 		this.DataApi = this.DataApi.bind(this)
 		this.sendForm = this.sendForm.bind(this)
@@ -21,23 +21,29 @@ export default class App extends React.Component {
 			ev.preventDefault();
 			this.DataApi();
 
-
 		} catch (err){
 			console.log(err);
 		}
-
 	}
 
 	DataApi (){
 
-		const query = this.refs.query.value
+		let query;
+
+		setInterval(() => {
+			query = document.getElementById('search').value;
+			sessionStorage.setItem('query', query);
+		}, 1000);
+
+		query = sessionStorage.getItem('query');
+		document.getElementById('search').value = query;
 
 		const params = {
 			part: 'snippet',
 			type: 'video',
 			q: query,
-			maxResults: 12		
-		}
+			maxResults: 12
+		};
 
 		try {
 
@@ -66,24 +72,23 @@ export default class App extends React.Component {
 		try {
 			this.DataApi()
 		} catch (err) {
-			console.log(err)
+			console.log(err);
 		}
 	}
 
 	render(){
-
 
 		return <div className="wrapper">
 			<form action="#" className="query">
 				<div className="inputContainer">
 					<input
 					 id="search"
+					 className="search"
 					 type="text"
 					 name="query"
-					 ref="query"
 					 placeholder="Find your favorite video..."/>
-			
-					<button 
+
+					<button
 					 className="icon-search send"
 					 type="submit"
 					 onClick={this.sendForm}></button>

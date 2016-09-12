@@ -9,8 +9,6 @@ export default class Reproductive extends React.Component {
 
 	render() {
 
-		{console.log(this.props.pagename)}
-
 		const url = `https://www.youtube.com/embed/${this.videoId}?rel=0&showinfo=0&controls=1&autoplay=1`;
 
 		if(this.videoId === undefined){
@@ -19,9 +17,9 @@ export default class Reproductive extends React.Component {
 
 			return <div className='wrapper container-reproductive'>
 				<div className="video">
-					<iframe width="885" height="480" src={url} frameborder="0" allowfullscreen></iframe>
+					<iframe width="885" height="480" src={url} frameBorder="0" allowFullScreen></iframe>
 				</div>
-			</div> 
+			</div>
 		}
 
 	}
