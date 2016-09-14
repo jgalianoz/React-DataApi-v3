@@ -4,11 +4,13 @@
   "description": "using youtube api for viewing videos",
   "main": "index.js",
   "dependencies": {
+    "axios": "^0.14.0",
     "babel": "^6.5.2",
     "babel-cli": "^6.14.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
     "babelify": "^7.3.0",
+    "baobab": "^2.3.3",
     "browserify": "^13.0.1",
     "express": "^4.14.0",
     "nib": "^1.1.2",
