@@ -3,7 +3,9 @@ import uid from 'uid';
 import Show from './Show';
 
 export default class Control extends React.Component {
-  handleClick({ item }){
+
+  handleClick( item ){
+    console.log(item)
     localStorage.setItem('item', JSON.stringify( item ));
   }
   render() {
@@ -19,9 +21,7 @@ export default class Control extends React.Component {
           return <Show
             key={id}
             data={el}
-            handleClick={this.handleClick}
-            video={el.item.id}
-            snippet={el.item.snippet} />
+            handleClick={this.handleClick}/>
         })
       }
     </div>

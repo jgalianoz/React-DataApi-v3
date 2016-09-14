@@ -49,6 +49,7 @@ export default class App extends React.Component {
 			client.search(params, (err, data) => {
 
         localStorage.setItem('videos', JSON.stringify(data));
+
 				if (err) console.log(err)
 
 				this.setState({data: [] })
