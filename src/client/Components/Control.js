@@ -2,28 +2,27 @@ import React from 'react';
 import uid from 'uid';
 import Show from './Show';
 
-export default class Control extends React.Component {
+export default function Control (props) {
 
-  handleClick( item ){
-    console.log(item)
+  let items = props.datos;
+
+  function handleClick( item ) {
+    //console.log(item)
     localStorage.setItem('item', JSON.stringify( item ));
   }
-  render() {
 
-    let items = this.props.datos;
+  return <div className="container-videos">
+    {
+      items.map( (el) => {
 
-    return <div className="container-videos">
-      {
-        items.map( (el) => {
+        let id = uid()
 
-          let id = uid()
+        return <Show
+          key={id}
+          data={el}
+          handleClick={handleClick}/>
+      })
+    }
+  </div>
 
-          return <Show
-            key={id}
-            data={el}
-            handleClick={this.handleClick}/>
-        })
-      }
-    </div>
-  }
 }

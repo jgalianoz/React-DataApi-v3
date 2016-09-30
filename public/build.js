@@ -27918,20 +27918,19 @@ var App = function (_React$Component) {
 				sessionStorage.setItem('query', query);
 			}, 1000);
 
-			query = sessionStorage.getItem('query');
+			query = sessionStorage.query;
 			document.getElementById('search').value = query;
+
 			var params = {
 				part: 'snippet',
 				type: 'video',
 				q: query,
-				maxResults: 12
+				maxResults: 18
 			};
 
 			try {
 
 				client.search(params, function (err, data) {
-
-					localStorage.setItem('videos', JSON.stringify(data));
 
 					if (err) console.log(err);
 
@@ -27999,8 +27998,7 @@ exports.default = App;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+exports.default = Control;
 
 var _react = require('react');
 
@@ -28016,54 +28014,29 @@ var _Show2 = _interopRequireDefault(_Show);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function Control(props) {
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+  var items = props.datos;
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Control = function (_React$Component) {
-  _inherits(Control, _React$Component);
-
-  function Control() {
-    _classCallCheck(this, Control);
-
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Control).apply(this, arguments));
+  function handleClick(item) {
+    //console.log(item)
+    localStorage.setItem('item', JSON.stringify(item));
   }
 
-  _createClass(Control, [{
-    key: 'handleClick',
-    value: function handleClick(item) {
-      console.log(item);
-      localStorage.setItem('item', JSON.stringify(item));
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
+  return _react2.default.createElement(
+    'div',
+    { className: 'container-videos' },
+    items.map(function (el) {
 
-      var items = this.props.datos;
+      var id = (0, _uid2.default)();
 
-      return _react2.default.createElement(
-        'div',
-        { className: 'container-videos' },
-        items.map(function (el) {
-
-          var id = (0, _uid2.default)();
-
-          return _react2.default.createElement(_Show2.default, {
-            key: id,
-            data: el,
-            handleClick: _this2.handleClick });
-        })
-      );
-    }
-  }]);
-
-  return Control;
-}(_react2.default.Component);
-
-exports.default = Control;
+      return _react2.default.createElement(_Show2.default, {
+        key: id,
+        data: el,
+        handleClick: handleClick });
+    })
+  );
+}
 
 },{"./Show":253,"react":240,"uid":241}],252:[function(require,module,exports){
 'use strict';
@@ -28077,6 +28050,14 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _Control = require('./Control');
+
+var _Control2 = _interopRequireDefault(_Control);
+
+var _App = require('./App');
+
+var _App2 = _interopRequireDefault(_App);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28094,7 +28075,7 @@ var Reproductive = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Reproductive).call(this, props));
 
-    _this.state = JSON.parse(localStorage.getItem('item'));
+    _this.state = JSON.parse(localStorage.item);
     _this.videoId = _this.props.location.query.v;
     return _this;
   }
@@ -28102,10 +28083,11 @@ var Reproductive = function (_React$Component) {
   _createClass(Reproductive, [{
     key: 'render',
     value: function render() {
+
       var url = 'https://www.youtube.com/embed/' + this.videoId + '?rel=0&showinfo=0&controls=1&autoplay=1';
 
       var date = new Date('' + this.state.snippet.publishedAt);
-      var publish = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+      var publish = date.getFullYear() + '/' + date.getMonth() + '/' + date.getDate();
 
       if (this.videoId === undefined) {
         return _react2.default.createElement(
@@ -28120,8 +28102,12 @@ var Reproductive = function (_React$Component) {
           { className: 'wrapper container-reproductive' },
           _react2.default.createElement(
             'div',
-            { className: 'video' },
-            _react2.default.createElement('iframe', { width: '768', height: '400', src: url, frameBorder: '0', allowFullScreen: true })
+            { className: 'stream' },
+            _react2.default.createElement(
+              'div',
+              { className: 'video' },
+              _react2.default.createElement('iframe', { width: '768', height: '400', src: url, frameBorder: '0', allowFullScreen: true })
+            )
           ),
           _react2.default.createElement(
             'div',
@@ -28180,14 +28166,13 @@ var Reproductive = function (_React$Component) {
 
 exports.default = Reproductive;
 
-},{"react":240}],253:[function(require,module,exports){
+},{"./App":250,"./Control":251,"react":240}],253:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+exports.default = Show;
 
 var _react = require('react');
 
@@ -28197,66 +28182,41 @@ var _reactRouter = require('react-router');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function Show(props) {
+  var item = props.data.item;
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+  var channel = 'https://www.youtube.com/channel/' + item.snippet.channelId;
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Show = function (_React$Component) {
-  _inherits(Show, _React$Component);
-
-  function Show() {
-    _classCallCheck(this, Show);
-
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Show).apply(this, arguments));
-  }
-
-  _createClass(Show, [{
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      var item = this.props.data.item;
-
-      var channel = 'https://www.youtube.com/channel/' + item.snippet.channelId;
-
-      return _react2.default.createElement(
-        'article',
-        { className: 'item-videos' },
-        _react2.default.createElement(
-          _reactRouter.Link,
-          { to: '/watch?v=' + item.id.videoId, onClick: function onClick() {
-              return _this2.props.handleClick(item);
-            } },
-          _react2.default.createElement(
-            'figure',
-            { className: 'item-videos-avatar' },
-            _react2.default.createElement('img', { src: item.snippet.thumbnails.medium.url })
-          ),
-          _react2.default.createElement(
-            'h2',
-            { className: 'item-videos-title' },
-            item.snippet.title
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'item-videos-author' },
-          _react2.default.createElement(
-            'a',
-            { href: channel, className: 'item-videos-author-channel', target: '__blank' },
-            item.snippet.channelTitle
-          )
-        )
-      );
-    }
-  }]);
-
-  return Show;
-}(_react2.default.Component);
-
-exports.default = Show;
+  return _react2.default.createElement(
+    'article',
+    { className: 'item-videos' },
+    _react2.default.createElement(
+      _reactRouter.Link,
+      { to: '/watch?v=' + item.id.videoId, onClick: function onClick() {
+          return props.handleClick(item);
+        } },
+      _react2.default.createElement(
+        'figure',
+        { className: 'item-videos-avatar' },
+        _react2.default.createElement('img', { src: item.snippet.thumbnails.medium.url })
+      ),
+      _react2.default.createElement(
+        'h2',
+        { className: 'item-videos-title' },
+        item.snippet.title
+      )
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'item-videos-author' },
+      _react2.default.createElement(
+        'a',
+        { href: channel, className: 'item-videos-author-channel', target: '__blank' },
+        item.snippet.channelTitle
+      )
+    )
+  );
+}
 
 },{"react":240,"react-router":35}],254:[function(require,module,exports){
 'use strict';

@@ -35,20 +35,19 @@ export default class App extends React.Component {
 			sessionStorage.setItem('query', query);
 		}, 1000);
 
-		query = sessionStorage.getItem('query');
-		document.getElementById('search').value = query;
+		query = sessionStorage.query;
+		document.getElementById('search').value = query
+
 		const params = {
 			part: 'snippet',
 			type: 'video',
 			q: query,
-			maxResults: 12
+			maxResults: 18
 		};
 
 		try {
 
 			client.search(params, (err, data) => {
-
-        localStorage.setItem('videos', JSON.stringify(data));
 
 				if (err) console.log(err)
 
