@@ -27918,7 +27918,7 @@ var App = function (_React$Component) {
 				sessionStorage.setItem('query', query);
 			}, 1000);
 
-			query = sessionStorage.query;
+			query = sessionStorage.getItem('query');
 			document.getElementById('search').value = query;
 
 			var params = {

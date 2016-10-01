@@ -35,11 +35,11 @@ export default class App extends React.Component {
 			sessionStorage.setItem('query', query);
 		}, 1000);
 
-		query = sessionStorage.query;
-		document.getElementById('search').value = query
+		query = sessionStorage.getItem('query');
+		document.getElementById('search').value = query;
 
 		const params = {
-			part: 'snippet',
+				part: 'snippet',
 			type: 'video',
 			q: query,
 			maxResults: 18
