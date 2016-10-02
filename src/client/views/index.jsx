@@ -45,7 +45,7 @@ return <html lang="en">
 
 			</section>
 
-			<script src="build.js"></script>
+			<script async src="build.js"></script>
 
 		</body>
 	</html>
