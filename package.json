@@ -25,7 +25,7 @@
   },
   "scripts": {
     "style": "stylus -u nib -c -o public/ src/client/stylus/main.styl",
-    "build": "NODE_PATH=. browserify -t babelify src/client/app.js | uglifyjs > public/build.js",
+    "build": "NODE_PATH=. browserify -t babelify src/client/app.js > public/build.js",
     "server": "babel-node server.js",
     "start": "npm run style && npm run build && npm run server"
   },
@@ -38,8 +38,5 @@
   "bugs": {
     "url": "https://github.com/ManuelGalindez26/React-DataApi-v3/issues"
   },
-  "homepage": "https://github.com/ManuelGalindez26/React-DataApi-v3#readme",
-  "devDependencies": {
-    "uglifyjs": "^2.4.10"
-  }
+  "homepage": "https://github.com/ManuelGalindez26/React-DataApi-v3#readme"
 }
